@@ -1,0 +1,46 @@
+table:
+  name: language
+  schema: misc
+array_relationships:
+- name: contents
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: content
+        schema: access_control
+- name: country_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: country_i18n
+        schema: geo
+- name: district_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: district_i18n
+        schema: geo
+- name: division_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: division_i18n
+        schema: geo
+- name: state_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: state_i18n
+        schema: geo
+- name: sub_district_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: lang
+      table:
+        name: sub_district_i18n
+        schema: geo

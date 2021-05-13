@@ -1,0 +1,7 @@
+mutation($data: user_insert_input!) {
+    insert_user_one(
+        object: $data
+    ) {
+        id
+    }
+}

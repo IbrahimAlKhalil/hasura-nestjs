@@ -1,0 +1,8 @@
+query($id: Int!) {
+    user_by_pk(id: $id) {
+        states(where: {type: {_eq: DELETED}}) {
+            type
+        }
+        password
+    }
+}

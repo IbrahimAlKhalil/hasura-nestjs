@@ -1,0 +1,11 @@
+table:
+  name: category
+  schema: suspension
+array_relationships:
+- name: category_reasons
+  using:
+    foreign_key_constraint_on:
+      column: category_id
+      table:
+        name: category_reason
+        schema: suspension

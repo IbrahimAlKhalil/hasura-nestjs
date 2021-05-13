@@ -1,0 +1,12 @@
+query(
+    $conditions: user_bool_exp!
+) {
+    user(
+        where: $conditions
+    ) {
+        id
+        email
+        mobile
+        password
+    }
+}

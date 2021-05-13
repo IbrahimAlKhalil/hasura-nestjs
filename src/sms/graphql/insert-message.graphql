@@ -1,0 +1,5 @@
+mutation ($objects: [sms_message_insert_input!]!) {
+    insert_sms_message(objects: $objects) {
+        affected_rows
+    }
+}

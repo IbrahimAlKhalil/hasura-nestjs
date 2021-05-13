@@ -1,0 +1,7 @@
+mutation ($data: suspension_state_insert_input!) {
+    insert_suspension_state_one(
+        object: $data
+    ) {
+        id
+    }
+}

@@ -1,0 +1,11 @@
+query($userId: Int!, $type: misc_verification_type_enum!, $payload: String!) {
+    misc_verification(
+        where: {
+            user_id: {_eq: $userId}
+            payload: {_eq: $payload}
+            type: {_eq: $type}
+        }
+    ) {
+        id
+    }
+}

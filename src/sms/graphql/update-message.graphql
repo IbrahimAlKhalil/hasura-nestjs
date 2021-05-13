@@ -1,0 +1,10 @@
+mutation ($id: Int!, $status: sms_message_status_enum) {
+    update_sms_message_by_pk(
+        pk_columns: {id: $id},
+        _set: {
+            status: $status
+        }
+    ) {
+        id
+    }
+}

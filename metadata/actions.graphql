@@ -1,0 +1,191 @@
+type Mutation {
+  auth_blacklist_token (
+    jti: Int!
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  auth_create_token (
+    expiresAt: date
+  ): auth_token
+}
+
+
+type Mutation {
+  auth_login (
+    payload: auth_login_input!
+  ): auth_login_resp!
+}
+
+
+type Mutation {
+  auth_login_google (
+    token: String!
+  ): auth_login_resp!
+}
+
+
+type Mutation {
+  auth_logout : action_resp_bool
+}
+
+
+type Mutation {
+  change_email (
+    email: String!
+  ): verification_resp
+}
+
+
+type Mutation {
+  change_mobile (
+    mobile: String!
+  ): verification_resp
+}
+
+
+type Mutation {
+  change_password (
+    payload: change_password_input!
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  change_reset_password (
+    payload: change_reset_password_input!
+  ): verification_resp
+}
+
+
+type Mutation {
+  create_account (
+    payload: register_input
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  delete_account (
+    payload: user_delete_account_input!
+  ): action_resp_bool!
+}
+
+
+type Mutation {
+  sms_send (
+    payload: sms_send_input
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  verification (
+    payload: verification_input!
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  verification_edit (
+    payload: verification_edit_input
+  ): action_resp_bool
+}
+
+
+type Mutation {
+  verification_resend (
+    id: Int!
+  ): action_resp_bool
+}
+
+
+
+
+enum reset_password_medium_enum {
+  EMAIL
+  MOBILE
+}
+
+enum register_user_type {
+  EMPLOYER
+  SEEKER
+}
+
+input register_input {
+  type : register_user_type!
+  name : String!
+  mobile : String!
+  username : String
+  email : String
+  tokenV3 : String!
+  tokenV2 : String
+  password : String!
+}
+
+input auth_login_input {
+  username : String!
+  password : String!
+  tokenV3 : String!
+  tokenV2 : String
+  rememberMe : Boolean
+}
+
+input verification_input {
+  id : Int!
+  token : String!
+  payload : String
+}
+
+input verification_edit_input {
+  id : Int!
+  payload : String!
+}
+
+input sms_send_input {
+  ids : [Int!]!
+  text : String!
+}
+
+input change_reset_password_input {
+  username : String!
+  tokenV3 : String!
+  tokenV2 : String
+  medium : reset_password_medium_enum!
+}
+
+input verification_pass_reset_input {
+  id : Int!
+  token : String!
+  key : String!
+  payload : String!
+}
+
+input change_password_input {
+  old : String!
+  new : String!
+}
+
+input user_delete_account_input {
+  password : String!
+  reasonIds : [Int!]
+}
+
+type action_resp_bool {
+  succeeded : Boolean!
+}
+
+type auth_token {
+  value : String!
+}
+
+type auth_login_resp {
+  csrfToken : String!
+  id : Int!
+}
+
+type verification_resp {
+  id : Int!
+}
+

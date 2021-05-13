@@ -1,0 +1,11 @@
+*
+!metadata
+!migrations
+node_modules
+!.npmrc
+!src
+!nest-cli.json
+!package.json
+!pnpm-lock.yaml
+!tsconfig.build.json
+!tsconfig.json

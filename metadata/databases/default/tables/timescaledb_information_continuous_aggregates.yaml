@@ -1,0 +1,3 @@
+table:
+  name: continuous_aggregates
+  schema: timescaledb_information

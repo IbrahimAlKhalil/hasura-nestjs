@@ -1,0 +1,40 @@
+table:
+  name: entity
+  schema: access_control
+is_enum: true
+array_relationships:
+- name: contents
+  using:
+    foreign_key_constraint_on:
+      column: entity
+      table:
+        name: content
+        schema: access_control
+- name: logs
+  using:
+    foreign_key_constraint_on:
+      column: entity
+      table:
+        name: log
+        schema: access_control
+- name: role_permissions
+  using:
+    foreign_key_constraint_on:
+      column: entity
+      table:
+        name: role_permission
+        schema: access_control
+- name: user_permissions
+  using:
+    foreign_key_constraint_on:
+      column: entity
+      table:
+        name: user_permission
+        schema: access_control
+select_permissions:
+- permission:
+    columns:
+    - value
+    filter: {}
+    limit: 100
+  role: mod

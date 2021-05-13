@@ -1,0 +1,12 @@
+table:
+  name: link_type
+  schema: notification
+is_enum: true
+array_relationships:
+- name: bases
+  using:
+    foreign_key_constraint_on:
+      column: link_type
+      table:
+        name: base
+        schema: notification

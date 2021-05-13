@@ -1,0 +1,11 @@
+query($ids: [smallint!]!) {
+    suspension_reason(
+        where: {
+            id: {
+                _in: $ids
+            }
+        }
+    ) {
+        internal
+    }
+}

@@ -1,0 +1,22 @@
+table:
+  name: content
+  schema: access_control
+object_relationships:
+- name: entityByEntity
+  using:
+    foreign_key_constraint_on: entity
+- name: language
+  using:
+    foreign_key_constraint_on: lang
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - entity
+    - lang
+    - name
+    - description
+    filter: {}
+    limit: 100
+  role: mod

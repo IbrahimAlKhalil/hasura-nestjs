@@ -1,0 +1,12 @@
+table:
+  name: gender
+  schema: profile
+is_enum: true
+array_relationships:
+- name: profiles
+  using:
+    foreign_key_constraint_on:
+      column: gender
+      table:
+        name: profile
+        schema: profile

@@ -1,0 +1,12 @@
+table:
+  name: type
+  schema: suspension
+is_enum: true
+array_relationships:
+- name: states
+  using:
+    foreign_key_constraint_on:
+      column: type
+      table:
+        name: state
+        schema: suspension

@@ -1,0 +1,29 @@
+table:
+  name: base_i18n
+  schema: notification
+object_relationships:
+- name: base
+  using:
+    foreign_key_constraint_on: base_id
+- name: language
+  using:
+    foreign_key_constraint_on: lang
+select_permissions:
+- permission:
+    columns:
+    - description
+    - id
+    - lang
+    - title
+    filter: {}
+    limit: 1
+  role: employer
+- permission:
+    columns:
+    - description
+    - id
+    - lang
+    - title
+    filter: {}
+    limit: 1
+  role: seeker

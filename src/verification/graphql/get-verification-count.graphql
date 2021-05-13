@@ -1,0 +1,16 @@
+query ($userId: Int!, $type: misc_verification_type_enum!) {
+    misc_verification_aggregate(
+        where: {
+            type: {
+                _eq: $type
+            }
+            user_id: {
+                _eq: $userId
+            }
+        }
+    ) {
+        aggregate {
+            count
+        }
+    }
+}

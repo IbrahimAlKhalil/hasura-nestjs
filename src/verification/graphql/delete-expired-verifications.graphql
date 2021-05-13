@@ -1,0 +1,11 @@
+mutation {
+    delete_misc_verification(
+        where: {
+            expires_at: {
+                _lte: "now()"
+            }
+        }
+    ) {
+        affected_rows
+    }
+}

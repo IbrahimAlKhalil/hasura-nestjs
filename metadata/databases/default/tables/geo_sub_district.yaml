@@ -1,0 +1,47 @@
+table:
+  name: sub_district
+  schema: geo
+object_relationships:
+- name: district
+  using:
+    foreign_key_constraint_on: district_id
+array_relationships:
+- name: addresses
+  using:
+    foreign_key_constraint_on:
+      column: sub_district_id
+      table:
+        name: address
+        schema: profile
+- name: i18n
+  using:
+    foreign_key_constraint_on:
+      column: sub_district_id
+      table:
+        name: sub_district_i18n
+        schema: geo
+select_permissions:
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: anonymous
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: employer
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: mod
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: seeker

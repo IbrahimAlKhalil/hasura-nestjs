@@ -1,0 +1,13 @@
+table:
+  name: log
+  schema: access_control
+object_relationships:
+- name: actionByAction
+  using:
+    foreign_key_constraint_on: action
+- name: entityByEntity
+  using:
+    foreign_key_constraint_on: entity
+- name: user
+  using:
+    foreign_key_constraint_on: user_id

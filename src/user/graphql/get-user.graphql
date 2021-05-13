@@ -1,0 +1,7 @@
+query($id: Int!) {
+    user_by_pk(id: $id) {
+        id
+        type
+        picture
+    }
+}

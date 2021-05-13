@@ -1,0 +1,7 @@
+table:
+  name: reason_i18n
+  schema: suspension
+object_relationships:
+- name: reason
+  using:
+    foreign_key_constraint_on: reason_id

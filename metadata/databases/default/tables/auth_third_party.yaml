@@ -1,0 +1,11 @@
+table:
+  name: third_party
+  schema: auth
+array_relationships:
+- name: third_party_user_ids
+  using:
+    foreign_key_constraint_on:
+      column: third_party_id
+      table:
+        name: third_party_user_id
+        schema: auth

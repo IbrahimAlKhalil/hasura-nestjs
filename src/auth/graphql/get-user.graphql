@@ -1,0 +1,17 @@
+query(
+    $conditions: user_bool_exp!
+) {
+    user(
+        where: $conditions
+    ) {
+        id
+        type
+        password
+        role_users {
+            role_id
+        }
+        states {
+            type
+        }
+    }
+}

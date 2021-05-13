@@ -1,0 +1,128 @@
+table:
+  name: user
+  schema: public
+object_relationships:
+- name: user_type
+  using:
+    foreign_key_constraint_on: type
+array_relationships:
+- name: access_tokens
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: access_token
+        schema: auth
+- name: addresses
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: address
+        schema: profile
+- name: logs
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: log
+        schema: access_control
+- name: messages
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: message
+        schema: sms
+- name: notifications
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: notification
+        schema: notification
+- name: notificationsByFrom
+  using:
+    foreign_key_constraint_on:
+      column: from
+      table:
+        name: notification
+        schema: notification
+- name: profiles
+  using:
+    foreign_key_constraint_on:
+      column: id
+      table:
+        name: profile
+        schema: profile
+- name: role_users
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: role_user
+        schema: access_control
+- name: states
+  using:
+    manual_configuration:
+      column_mapping:
+        id: user_id
+      insertion_order: null
+      remote_table:
+        name: state
+        schema: suspension
+- name: user_permissions
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: user_permission
+        schema: access_control
+select_permissions:
+- permission:
+    columns:
+    - id
+    - name
+    - picture
+    filter:
+      type:
+        _eq: EMPLOYER
+    limit: 1
+  role: anonymous
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - name
+    - picture
+    filter:
+      type:
+        _eq: SEEKER
+    limit: 20
+  role: employer
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - type
+    - name
+    - picture
+    - username
+    - email
+    - mobile
+    - password
+    - created_at
+    - updated_at
+    filter: {}
+    limit: 100
+  role: mod
+- permission:
+    columns:
+    - id
+    - name
+    - picture
+    filter:
+      type:
+        _eq: EMPLOYER
+    limit: 1
+  role: seeker

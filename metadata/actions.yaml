@@ -1,0 +1,149 @@
+actions:
+- name: auth_blacklist_token
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/auth-action/blacklist'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: auth_create_token
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/auth-action/create-personal-token'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: auth_login
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/auth-action/login'
+  permissions:
+  - role: anonymous
+- name: auth_login_google
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/auth-action/login-google'
+  permissions:
+  - role: anonymous
+- name: auth_logout
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/auth-action/logout'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: change_email
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/change-action/email'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: change_mobile
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/change-action/mobile'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: change_password
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/change-action/password'
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: change_reset_password
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/change-action/password-reset'
+  permissions:
+  - role: anonymous
+- name: create_account
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/registration-action/create-account'
+  permissions:
+  - role: anonymous
+- name: delete_account
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/user-action/delete-account'
+  permissions:
+  - role: seeker
+  - role: employer
+- name: sms_send
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/sms-action/send'
+  permissions:
+  - role: mod
+- name: verification
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/verification-action/verify'
+    forward_client_headers: true
+  permissions:
+  - role: anonymous
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: verification_edit
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/verification-action/edit'
+    forward_client_headers: true
+  permissions:
+  - role: employer
+  - role: mod
+  - role: seeker
+- name: verification_resend
+  definition:
+    kind: synchronous
+    handler: '{{BACKEND}}/verification-action/resend'
+    forward_client_headers: true
+  permissions:
+  - role: anonymous
+  - role: employer
+  - role: mod
+  - role: seeker
+custom_types:
+  enums:
+  - name: reset_password_medium_enum
+    values:
+    - description: null
+      is_deprecated: null
+      value: EMAIL
+    - description: null
+      is_deprecated: null
+      value: MOBILE
+  - name: register_user_type
+    values:
+    - description: null
+      is_deprecated: null
+      value: EMPLOYER
+    - description: null
+      is_deprecated: null
+      value: SEEKER
+  input_objects:
+  - name: register_input
+  - name: auth_login_input
+  - name: verification_input
+  - name: verification_edit_input
+  - name: sms_send_input
+  - name: change_reset_password_input
+  - name: verification_pass_reset_input
+  - name: change_password_input
+  - name: user_delete_account_input
+  objects:
+  - name: action_resp_bool
+  - name: auth_token
+  - name: auth_login_resp
+  - name: verification_resp
+  scalars: []

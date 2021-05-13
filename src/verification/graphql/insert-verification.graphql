@@ -1,0 +1,27 @@
+mutation(
+    $userId: Int!
+    $payload: String
+    $token: String!
+    $type: misc_verification_type_enum!
+    $key: String
+    $expiresAt: timestamptz
+) {
+    insert_misc_verification_one(
+        object: {
+            user_id:  $userId
+            payload: $payload
+            type: $type
+            token: $token
+            key: $key
+            expires_at: $expiresAt
+        }
+        on_conflict: {
+            constraint: verification_user_id_type_payload_key
+            update_columns: []
+        }
+    ) {
+        id
+        key
+        expires_at
+    }
+}

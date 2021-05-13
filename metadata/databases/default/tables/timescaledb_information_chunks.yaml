@@ -1,0 +1,3 @@
+table:
+  name: chunks
+  schema: timescaledb_information

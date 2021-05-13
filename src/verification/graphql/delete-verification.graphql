@@ -1,0 +1,5 @@
+mutation($id: Int!) {
+    delete_misc_verification_by_pk(id: $id) {
+        id
+    }
+}

@@ -1,0 +1,43 @@
+table:
+  name: division_i18n
+  schema: geo
+object_relationships:
+- name: division
+  using:
+    foreign_key_constraint_on: division_id
+- name: language
+  using:
+    foreign_key_constraint_on: lang
+select_permissions:
+- permission:
+    columns:
+    - id
+    - lang
+    - name
+    filter: {}
+    limit: 1
+  role: anonymous
+- permission:
+    columns:
+    - id
+    - lang
+    - name
+    filter: {}
+    limit: 1
+  role: employer
+- permission:
+    columns:
+    - id
+    - lang
+    - name
+    filter: {}
+    limit: 1
+  role: mod
+- permission:
+    columns:
+    - id
+    - lang
+    - name
+    filter: {}
+    limit: 1
+  role: seeker

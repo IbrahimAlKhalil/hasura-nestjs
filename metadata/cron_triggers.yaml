@@ -1,0 +1,25 @@
+- name: access-token-delete-expired
+  webhook: '{{BACKEND}}/auth-hook/delete-expired-tokens'
+  schedule: 0 21 * * *
+  include_in_metadata: true
+  payload: {}
+  retry_conf:
+    num_retries: 5
+    timeout_seconds: 240
+    tolerance_seconds: 21600
+    retry_interval_seconds: 240
+- name: user-delete
+  webhook: '{{BACKEND}}/user-event/delete-users'
+  schedule: 0 20 * * *
+  include_in_metadata: true
+  payload: {}
+  retry_conf:
+    num_retries: 3
+    timeout_seconds: 120
+    tolerance_seconds: 21600
+    retry_interval_seconds: 15
+- name: verification-delete-expired
+  webhook: '{{BACKEND}}/verification-event/delete-expired'
+  schedule: 30 20 * * *
+  include_in_metadata: true
+  payload: {}

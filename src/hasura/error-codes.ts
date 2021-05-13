@@ -1,0 +1,1 @@
+export const CONSTRAINT_VIOLATION = 'constraint-violation';

@@ -1,0 +1,74 @@
+table:
+  name: verification
+  schema: misc
+object_relationships:
+- name: verification_type
+  using:
+    foreign_key_constraint_on: type
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - payload
+    - sent_at
+    - sent_count
+    - type
+    filter:
+      _and:
+      - key:
+          _is_null: true
+      - user_id:
+          _eq: X-Hasura-User-Id
+    limit: 1
+  role: employer
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - payload
+    - sent_at
+    - sent_count
+    - type
+    filter:
+      _and:
+      - key:
+          _is_null: true
+      - user_id:
+          _eq: X-Hasura-User-Id
+    limit: 1
+  role: mod
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - payload
+    - sent_at
+    - sent_count
+    - type
+    filter:
+      _and:
+      - key:
+          _is_null: true
+      - user_id:
+          _eq: X-Hasura-User-Id
+    limit: 1
+  role: seeker
+event_triggers:
+- definition:
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - sent_count
+      - payload
+  name: verification
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{BACKEND}}/verification-event/send-token"

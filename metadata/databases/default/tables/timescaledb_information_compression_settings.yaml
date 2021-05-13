@@ -1,0 +1,3 @@
+table:
+  name: compression_settings
+  schema: timescaledb_information

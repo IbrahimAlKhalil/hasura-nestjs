@@ -1,0 +1,13 @@
+table:
+  name: address
+  schema: profile
+object_relationships:
+- name: addressTypeByAddressType
+  using:
+    foreign_key_constraint_on: address_type
+- name: sub_district
+  using:
+    foreign_key_constraint_on: sub_district_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id

@@ -1,0 +1,7 @@
+table:
+  name: third_party_user_id
+  schema: auth
+object_relationships:
+- name: third_party
+  using:
+    foreign_key_constraint_on: third_party_id

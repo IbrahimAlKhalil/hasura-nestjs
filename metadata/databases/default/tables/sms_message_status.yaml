@@ -1,0 +1,12 @@
+table:
+  name: message_status
+  schema: sms
+is_enum: true
+array_relationships:
+- name: messages
+  using:
+    foreign_key_constraint_on:
+      column: status
+      table:
+        name: message
+        schema: sms

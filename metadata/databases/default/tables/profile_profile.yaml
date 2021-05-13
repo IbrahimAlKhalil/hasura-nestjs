@@ -1,0 +1,10 @@
+table:
+  name: profile
+  schema: profile
+object_relationships:
+- name: genderByGender
+  using:
+    foreign_key_constraint_on: gender
+- name: user
+  using:
+    foreign_key_constraint_on: id

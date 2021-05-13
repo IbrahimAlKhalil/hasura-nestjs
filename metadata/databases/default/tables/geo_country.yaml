@@ -1,0 +1,44 @@
+table:
+  name: country
+  schema: geo
+array_relationships:
+- name: i18n
+  using:
+    foreign_key_constraint_on:
+      column: country_id
+      table:
+        name: country_i18n
+        schema: geo
+- name: states
+  using:
+    foreign_key_constraint_on:
+      column: country_id
+      table:
+        name: state
+        schema: geo
+select_permissions:
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: anonymous
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: employer
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: mod
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: seeker

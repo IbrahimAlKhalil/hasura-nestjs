@@ -1,0 +1,14 @@
+query($jti: Int!, $userId: Int!) {
+    auth_access_token(
+        where: {
+            id: {_eq: $jti}
+            user_id: {_eq: $userId}
+            expires_at: {_gt: "now()"}
+            _not: {
+                blacklist: {}
+            }
+        }
+    ) {
+        id
+    }
+}

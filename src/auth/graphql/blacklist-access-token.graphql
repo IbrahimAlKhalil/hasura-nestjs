@@ -1,0 +1,13 @@
+mutation($jti: Int!) {
+    insert_auth_blacklist_one(
+        object: {
+            id: $jti
+        }
+        on_conflict: {
+            constraint: blacklist_pkey
+            update_columns: []
+        }
+    ) {
+        id
+    }
+}

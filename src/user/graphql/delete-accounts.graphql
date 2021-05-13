@@ -1,0 +1,28 @@
+mutation ($suspendedPeriod: timestamptz, $nonVerifiedPeriod: timestamptz) {
+    delete_user(
+        where: {
+            _or: [
+                {
+                    states: {
+                        type: {
+                            _eq: DELETED
+                        },
+                        created_at: {
+                            _lt: $suspendedPeriod
+                        }
+                    }
+                },
+                {
+                    verified: {
+                        _eq: false
+                    },
+                    created_at: {
+                        _lt: $nonVerifiedPeriod
+                    }
+                }
+            ]
+        }
+    ) {
+        affected_rows
+    }
+}

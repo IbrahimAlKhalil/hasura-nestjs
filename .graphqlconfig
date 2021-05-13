@@ -1,0 +1,9 @@
+{
+  "name": "Edu GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "includes": [
+    "./schema.graphql",
+    "./src/**/*.graphql",
+    "./src/**/*.ts"
+  ]
+}

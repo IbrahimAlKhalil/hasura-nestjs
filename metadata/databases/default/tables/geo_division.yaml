@@ -1,0 +1,47 @@
+table:
+  name: division
+  schema: geo
+object_relationships:
+- name: state
+  using:
+    foreign_key_constraint_on: state_id
+array_relationships:
+- name: districts
+  using:
+    foreign_key_constraint_on:
+      column: division_id
+      table:
+        name: district
+        schema: geo
+- name: i18n
+  using:
+    foreign_key_constraint_on:
+      column: division_id
+      table:
+        name: division_i18n
+        schema: geo
+select_permissions:
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: anonymous
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: employer
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: mod
+- permission:
+    columns:
+    - id
+    filter: {}
+    limit: 200
+  role: seeker

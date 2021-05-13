@@ -1,0 +1,32 @@
+table:
+  name: message
+  schema: sms
+object_relationships:
+- name: message_status
+  using:
+    foreign_key_constraint_on: status
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+event_triggers:
+- definition:
+    enable_manual: false
+    insert:
+      columns: "*"
+  name: message-created
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{BACKEND}}/sms-event/send"
+- definition:
+    enable_manual: false
+    update:
+      columns:
+      - status
+  name: message-updated
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{BACKEND}}/sms-event/retry"

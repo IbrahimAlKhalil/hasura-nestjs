@@ -1,0 +1,74 @@
+table:
+  name: access_token
+  schema: auth
+object_relationships:
+- name: blacklist
+  using:
+    manual_configuration:
+      column_mapping:
+        id: id
+      insertion_order: null
+      remote_table:
+        name: blacklist
+        schema: auth
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - ip_address
+    - personal
+    - user_agent
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - expires_at:
+          _gt: now()
+      - blacklist:
+          id:
+            _is_null: true
+    limit: 20
+  role: employer
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - ip_address
+    - personal
+    - user_agent
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - expires_at:
+          _gt: now()
+      - blacklist:
+          id:
+            _is_null: true
+    limit: 20
+  role: mod
+- permission:
+    columns:
+    - created_at
+    - expires_at
+    - id
+    - ip_address
+    - personal
+    - user_agent
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - expires_at:
+          _gt: now()
+      - blacklist:
+          id:
+            _is_null: true
+    limit: 20
+  role: seeker

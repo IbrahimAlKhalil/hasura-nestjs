@@ -1,0 +1,4 @@
+table:
+  name: state_type
+  schema: suspension
+is_enum: true

@@ -1,0 +1,8 @@
+mutation(
+    $userId: Int!
+    $username: String!
+) {
+    update_user_by_pk(pk_columns: {id: $userId}, _set: {username: $username}) {
+        id
+    }
+}

@@ -1,0 +1,13 @@
+table:
+  name: role_permission
+  schema: access_control
+object_relationships:
+- name: actionByAction
+  using:
+    foreign_key_constraint_on: action
+- name: entityByEntity
+  using:
+    foreign_key_constraint_on: entity
+- name: role
+  using:
+    foreign_key_constraint_on: role_id

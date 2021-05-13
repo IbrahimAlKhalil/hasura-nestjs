@@ -1,0 +1,101 @@
+table:
+  name: notification
+  schema: notification
+object_relationships:
+- name: base
+  using:
+    foreign_key_constraint_on: base_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+- name: userByFrom
+  using:
+    foreign_key_constraint_on: from
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - from
+    - id
+    - picture
+    - read
+    - vars
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+    limit: 20
+  role: employer
+- permission:
+    columns:
+    - created_at
+    - from
+    - id
+    - picture
+    - read
+    - vars
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+    limit: 20
+  role: mod
+- permission:
+    columns:
+    - created_at
+    - from
+    - id
+    - picture
+    - read
+    - vars
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+    limit: 20
+  role: seeker
+update_permissions:
+- permission:
+    check: null
+    columns: []
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - read:
+          _eq: false
+    set:
+      read: "true"
+  role: employer
+- permission:
+    check: null
+    columns: []
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - read:
+          _eq: false
+    set:
+      read: "true"
+  role: mod
+- permission:
+    check: null
+    columns: []
+    filter:
+      _and:
+      - user_id:
+          _eq: X-Hasura-User-Id
+      - read:
+          _eq: false
+    set:
+      read: "true"
+  role: seeker
+event_triggers:
+- definition:
+    enable_manual: false
+    insert:
+      columns: "*"
+  name: notification-created
+  retry_conf:
+    interval_sec: 20
+    num_retries: 10
+    timeout_sec: 60
+  webhook: "{{BACKEND}}/n-event/notify"

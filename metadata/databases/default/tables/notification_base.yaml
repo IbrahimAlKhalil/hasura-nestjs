@@ -1,0 +1,41 @@
+table:
+  name: base
+  schema: notification
+object_relationships:
+- name: linkTypeByLinkType
+  using:
+    foreign_key_constraint_on: link_type
+array_relationships:
+- name: contents
+  using:
+    foreign_key_constraint_on:
+      column: base_id
+      table:
+        name: base_i18n
+        schema: notification
+- name: notifications
+  using:
+    foreign_key_constraint_on:
+      column: base_id
+      table:
+        name: notification
+        schema: notification
+select_permissions:
+- permission:
+    columns:
+    - id
+    - link
+    - link_type
+    - picture
+    filter: {}
+    limit: 1
+  role: employer
+- permission:
+    columns:
+    - id
+    - link
+    - link_type
+    - picture
+    filter: {}
+    limit: 1
+  role: seeker

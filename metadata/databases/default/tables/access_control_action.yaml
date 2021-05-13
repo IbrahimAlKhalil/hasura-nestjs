@@ -1,0 +1,34 @@
+table:
+  name: action
+  schema: access_control
+is_enum: true
+array_relationships:
+- name: logs
+  using:
+    foreign_key_constraint_on:
+      column: action
+      table:
+        name: log
+        schema: access_control
+- name: role_permissions
+  using:
+    foreign_key_constraint_on:
+      column: action
+      table:
+        name: role_permission
+        schema: access_control
+- name: user_permissions
+  using:
+    foreign_key_constraint_on:
+      column: action
+      table:
+        name: user_permission
+        schema: access_control
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - value
+    filter: {}
+    limit: 100
+  role: mod

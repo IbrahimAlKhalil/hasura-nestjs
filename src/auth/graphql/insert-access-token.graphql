@@ -1,0 +1,19 @@
+mutation(
+    $userId: Int!
+    $userAgent: String
+    $ipAddress: String!
+    $personal: Boolean = false
+    $expiresAt: timestamptz
+) {
+    insert_auth_access_token_one(
+        object: {
+            user_id: $userId
+            user_agent: $userAgent
+            ip_address: $ipAddress
+            personal: $personal
+            expires_at: $expiresAt
+        }
+    ) {
+        id
+    }
+}

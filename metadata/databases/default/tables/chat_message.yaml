@@ -1,0 +1,11 @@
+table:
+  name: message
+  schema: chat
+array_relationships:
+- name: message_files
+  using:
+    foreign_key_constraint_on:
+      column: message_id
+      table:
+        name: message_file
+        schema: chat

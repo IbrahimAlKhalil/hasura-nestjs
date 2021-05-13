@@ -1,0 +1,25 @@
+table:
+  name: reason
+  schema: suspension
+array_relationships:
+- name: category_reasons
+  using:
+    foreign_key_constraint_on:
+      column: reason_id
+      table:
+        name: category_reason
+        schema: suspension
+- name: reason_i18ns
+  using:
+    foreign_key_constraint_on:
+      column: reason_id
+      table:
+        name: reason_i18n
+        schema: suspension
+- name: state_reasons
+  using:
+    foreign_key_constraint_on:
+      column: reason_id
+      table:
+        name: state_reason
+        schema: suspension

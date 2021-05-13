@@ -1,0 +1,7 @@
+table:
+  name: blacklist
+  schema: auth
+object_relationships:
+- name: access_token
+  using:
+    foreign_key_constraint_on: id

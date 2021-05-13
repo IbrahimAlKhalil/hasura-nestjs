@@ -1,0 +1,14 @@
+mutation ($id: Int!) {
+    delete_suspension_state(
+        where: {
+            user_id: {
+                _eq: $id
+            }
+            type: {
+                _eq: DELETED
+            }
+        }
+    ) {
+        affected_rows
+    }
+}

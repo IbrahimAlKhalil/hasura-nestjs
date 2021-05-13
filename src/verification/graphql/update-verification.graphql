@@ -1,0 +1,13 @@
+mutation(
+    $id: Int!
+    $set: misc_verification_set_input
+    $inc: misc_verification_inc_input
+) {
+    update_misc_verification_by_pk(
+        pk_columns: {id: $id}
+        _set: $set
+        _inc: $inc
+    ) {
+        id
+    }
+}

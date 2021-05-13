@@ -1,0 +1,28 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "assets": [
+      {
+        "include": "./**/*.graphql",
+        "watchAssets": true
+      },
+      {
+        "include": "./**/*.sql",
+        "watchAssets": true
+      },
+      {
+        "include": "./**/*.png",
+        "watchAssets": false
+      },
+      {
+        "include": "./**/*.jpg",
+        "watchAssets": false
+      },
+      {
+        "include": "./**/*.jpeg",
+        "watchAssets": false
+      }
+    ]
+  }
+}

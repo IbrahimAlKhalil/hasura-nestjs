@@ -1,0 +1,13 @@
+query($id: Int!) {
+    misc_verification_by_pk(id: $id) {
+        id
+        user_id
+        type
+        token
+        payload
+        sent_count
+        sent_at
+        expires_at
+        key
+    }
+}

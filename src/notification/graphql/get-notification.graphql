@@ -1,0 +1,23 @@
+query ($id: Int!) {
+    notification_notification_by_pk(id: $id) {
+        id
+        vars
+        read
+        picture
+        created_at
+        userByFrom {
+            picture
+        }
+        base {
+            id
+            link
+            link_type
+            contents {
+                description
+                title
+                lang
+            }
+            picture
+        }
+    }
+}

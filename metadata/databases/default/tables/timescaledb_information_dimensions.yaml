@@ -1,0 +1,3 @@
+table:
+  name: dimensions
+  schema: timescaledb_information

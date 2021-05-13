@@ -1,0 +1,25 @@
+query(
+    $mobile: String!
+    $email: String
+    $hasEmail: Boolean!
+) {
+    mobileUser: user(
+        where: {
+            mobile: {
+                _eq: $mobile
+            }
+        }
+    ) {
+        id
+    }
+
+    emailUser: user(
+        where: {
+            email: {
+                _eq: $email
+            }
+        }
+    ) @include(if: $hasEmail) {
+        id
+    }
+}

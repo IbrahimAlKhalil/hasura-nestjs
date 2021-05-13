@@ -1,0 +1,26 @@
+table:
+  name: role
+  schema: access_control
+array_relationships:
+- name: role_permissions
+  using:
+    foreign_key_constraint_on:
+      column: role_id
+      table:
+        name: role_permission
+        schema: access_control
+- name: role_users
+  using:
+    foreign_key_constraint_on:
+      column: role_id
+      table:
+        name: role_user
+        schema: access_control
+select_permissions:
+- permission:
+    columns:
+    - id
+    - name
+    filter: {}
+    limit: 100
+  role: mod

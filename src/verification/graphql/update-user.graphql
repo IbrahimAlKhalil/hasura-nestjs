@@ -1,0 +1,11 @@
+mutation(
+    $id: Int!
+    $set: user_set_input!
+) {
+    update_user_by_pk(
+        pk_columns: {id: $id}
+        _set: $set
+    ) {
+        id
+    }
+}
