@@ -1,0 +1,7 @@
+table:
+  name: member
+  schema: chat
+object_relationships:
+- name: conversation
+  using:
+    foreign_key_constraint_on: conversation_id

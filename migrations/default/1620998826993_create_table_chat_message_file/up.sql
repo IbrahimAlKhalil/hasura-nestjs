@@ -1,0 +1,1 @@
+CREATE TABLE "chat"."message_file" ("id" serial NOT NULL, "message_id" integer NOT NULL, "path" text NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("message_id") REFERENCES "chat"."message"("id") ON UPDATE cascade ON DELETE cascade);
