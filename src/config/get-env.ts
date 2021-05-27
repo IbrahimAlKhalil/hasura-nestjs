@@ -16,7 +16,7 @@ export function getEnvNum(name: string, _default?: number): number {
   const value = process.env[name];
 
   if (!value) {
-    if (!_default) {
+    if (_default === undefined) {
       throw new Error(`Environment variable "${name}" is required`);
     }
 
