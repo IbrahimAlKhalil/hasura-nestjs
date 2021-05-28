@@ -1,6 +1,6 @@
+import { ICookieOptions, IHttpRequest, IHttpResponse } from 'nanoexpress';
 import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { RecaptchaService } from '../recaptcha/recaptcha.service';
-import { CookieOptions, Request, Response } from 'express';
 import { ActionPayload } from '../typings/action-payload';
 import { HasuraService } from '../hasura/hasura.service';
 import { ActionException } from '../action-exception';
@@ -32,29 +32,28 @@ export class AuthActionController {
   @Post('login')
   async login(
     @Body() { input: { payload } }: ActionPayload<Mutation_RootAuth_LoginArgs>,
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
+    @Req() request: IHttpRequest,
+    @Res({ passthrough: true }) response: IHttpResponse,
   ): Promise<Action_Resp_Bool | Auth_Login_Resp> {
     if (this.config.app.env === 'production') {
-      await this.recaptchaService.verify(payload.tokenV3, 'login', request.ip, payload.tokenV2);
+      await this.recaptchaService.verify(payload.tokenV3, 'login', request.getIP(), payload.tokenV2);
     }
 
     const result = await this.authService.login(
       payload.username,
       payload.password,
-      request.ip,
-      request.header('user-agent'),
+      request.getIP(),
+      request.headers['user-agent'],
       payload.rememberMe,
     );
 
-    const options: CookieOptions = {
-      sameSite: 'lax',
+    const options: ICookieOptions = {
       secure: true,
       httpOnly: true,
     };
 
     if (payload.rememberMe) {
-      options.expires = new Date(Date.now() + this.config.auth.longTokenLifetime);
+      options.expires = new Date(Date.now() + this.config.auth.longTokenLifetime).getTime();
     }
 
     response.cookie(this.config.auth.cookieKey, result.accessToken, options);
@@ -66,8 +65,8 @@ export class AuthActionController {
   }
 
   @Post('logout')
-  logout(@Res() response: Response): void {
-    response.clearCookie(this.config.auth.cookieKey);
+  logout(@Res() response: IHttpResponse): void {
+    response.removeCookie(this.config.auth.cookieKey);
 
     response.json({
       succeeded: true,
@@ -90,7 +89,7 @@ export class AuthActionController {
   @Post('create-personal-token')
   async createPersonalToken(
     @Body() payload: ActionPayload<Mutation_RootAuth_Create_TokenArgs>,
-    @Req() request: Request,
+    @Req() request: IHttpRequest,
   ): Promise<Auth_Token> {
     if (!(await this.authService.checkIsUserVerified(Number(payload.session_variables['x-hasura-user-id'])))) {
       throw new ActionException(CommonErr.ACCOUNT_NOT_VERIFIED);
@@ -117,8 +116,8 @@ export class AuthActionController {
         Number(payload.session_variables['x-hasura-user-id']),
         user.type,
         new Date(payload.input.expiresAt || Date.now() + 3600000),
-        request.ip,
-        request.header('user-agent'),
+        request.getIP(),
+        request.headers['user-agent'],
         user.role_users.map(ru => ru.role_id),
       ),
     };

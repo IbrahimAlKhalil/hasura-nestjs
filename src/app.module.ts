@@ -1,8 +1,9 @@
 import { RegistrationModule } from './registration/registration.module';
 import { VerificationModule } from './verification/verification.module';
 import { NotificationModule } from './notification/notification.module';
-import { SocketIoModule } from './socket-io/socket-io.module';
+import { RecaptchaModule } from './recaptcha/recaptcha.module';
 import { PostgresModule } from './postgres/postgres.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ChangeModule } from './change/change.module';
 import { HasuraModule } from './hasura/hasura.module';
 import { ConfigModule } from './config/config.module';
@@ -14,10 +15,10 @@ import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
 import { MiscModule } from './misc/misc.module';
 import { UserModule } from './user/user.module';
+import { UwsModule } from './uws/uws.module';
 import { SmsModule } from './sms/sms.module';
 import { Config } from './config/config';
 import { Client } from 'minio';
-import { RecaptchaModule } from './recaptcha/recaptcha.module';
 
 @Module({
   imports: [
@@ -31,13 +32,20 @@ import { RecaptchaModule } from './recaptcha/recaptcha.module';
     AuthModule,
     ChangeModule,
     LibPnModule,
-    SocketIoModule,
     MiscModule,
     SmsModule,
     UserModule,
     MinioModule,
     NotificationModule,
     RecaptchaModule,
+    UwsModule,
+    EventEmitterModule.forRoot({
+      global: true,
+      wildcard: false,
+      newListener: false,
+      removeListener: false,
+      ignoreErrors: false,
+    }),
   ],
   providers: [],
 })

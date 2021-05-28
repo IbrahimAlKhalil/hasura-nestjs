@@ -4,9 +4,9 @@ import { PermMetadata } from './interfaces/perm-metadata';
 import { ActionPayload } from '../typings/action-payload';
 import { ActionException } from '../action-exception';
 import { AuthService } from './auth.service';
+import { IHttpRequest } from 'nanoexpress';
 import { Reflector } from '@nestjs/core';
 import { CommonErr } from '../errors';
-import { Request } from 'express';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -17,9 +17,9 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest<Request<never, never, ActionPayload>>();
+    const request = context.switchToHttp().getRequest<IHttpRequest>();
 
-    if (request.body.session_variables['x-hasura-role'] === 'admin') {
+    if ((request.body as ActionPayload).session_variables['x-hasura-role'] === 'admin') {
       return true;
     }
 
@@ -33,11 +33,11 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  async checkPerm(metadata: PermMetadata | undefined, req: Request<never, never, ActionPayload>): Promise<boolean> {
+  async checkPerm(metadata: PermMetadata | undefined, request: IHttpRequest): Promise<boolean> {
     if (!metadata) {
       return true;
     }
 
-    return this.authService.checkPermission(metadata, req.body.session_variables);
+    return this.authService.checkPermission(metadata, (request.body as ActionPayload).session_variables);
   }
 }

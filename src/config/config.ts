@@ -2,6 +2,7 @@ import debounceEmail from './data/debounce-email';
 import verification from './data/verification';
 import { Injectable } from '@nestjs/common';
 import suspension from './data/suspension';
+import websocket from './data/websocket';
 import recaptcha from './data/recaptcha';
 import postgres from './data/postgres';
 import hasura from './data/hasura';
@@ -17,6 +18,7 @@ export class Config {
   debounceEmail = debounceEmail();
   verification = verification();
   suspension = suspension();
+  websocket = websocket();
   recaptcha = recaptcha();
   postgres = postgres();
   hasura = hasura();

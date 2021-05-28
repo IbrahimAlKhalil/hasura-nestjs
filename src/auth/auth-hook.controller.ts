@@ -1,10 +1,9 @@
-import { Controller, HttpCode, Post, Req } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { SessionVariable } from '../typings/session-variable';
 import { AuthService } from './auth.service';
 import { Config } from '../config/config';
 import { JwtService } from '@nestjs/jwt';
 import { Pool, QueryConfig } from 'pg';
-import { Request } from 'express';
 
 @Controller('auth-hook')
 export class AuthHookController {
@@ -26,10 +25,10 @@ export class AuthHookController {
   @Post('authorize')
   @HttpCode(200)
   async authorize(
-    @Req() request: Request,
+    @Body() body: Record<string, any>
   ): Promise<SessionVariable> {
     // Don't use destructuring here
-    const headers = request.body.headers;
+    const headers = body.headers;
 
     return this.authService.authorize(
       headers.Cookie || headers.cookie,

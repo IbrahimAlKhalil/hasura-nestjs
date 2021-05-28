@@ -1,14 +1,15 @@
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { RedisIoAdapter } from './socket-io/redis-io.adapter';
 import { ExceptionFilter } from './exception.filter';
+import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Adapter } from './uws/adapter';
 
-async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+async function bootstrap(): Promise<void> {
+  const app = await NestFactory.create<INestApplication>(
+    AppModule,
+    new Adapter(),
+  );
 
-  app.disable('x-powered-by');
-  app.useWebSocketAdapter(new RedisIoAdapter(app));
   app.useGlobalFilters(new ExceptionFilter());
 
   await app.listen(

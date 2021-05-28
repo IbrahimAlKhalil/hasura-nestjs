@@ -1,6 +1,7 @@
 import { VerificationService } from '../verification/verification.service';
 import { RecaptchaService } from '../recaptcha/recaptcha.service';
 import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { IHttpRequest, IHttpResponse } from 'nanoexpress';
 import { ActionPayload } from '../typings/action-payload';
 import { BcryptService } from '../bcrypt/bcrypt.service';
 import { HasuraService } from '../hasura/hasura.service';
@@ -9,7 +10,6 @@ import { ActionException } from '../action-exception';
 import { AuthService } from '../auth/auth.service';
 import { MiscService } from '../misc/misc.service';
 import { ChangeErr, CommonErr } from '../errors';
-import { Request, Response } from 'express';
 import isEmail from 'validator/lib/isEmail';
 import { Config } from '../config/config';
 
@@ -83,7 +83,7 @@ export class ChangeActionController {
   @Post('mobile')
   async changeMobile(
     @Body() { input, session_variables }: ActionPayload<Mutation_RootChange_MobileArgs>,
-    @Res({ passthrough: true }) response: Response,
+    @Res({ passthrough: true }) response: IHttpResponse,
   ): Promise<Verification_Resp> {
     if (!(await this.authService.checkIsUserVerified(Number(session_variables['x-hasura-user-id'])))) {
       throw new ActionException(CommonErr.ACCOUNT_NOT_VERIFIED);
@@ -107,7 +107,7 @@ export class ChangeActionController {
       );
 
       response.cookie(this.config.verification.cookieKey.mobile, verification.key, {
-        expires: new Date(verification.expires_at),
+        expires: new Date(verification.expires_at).getTime(),
         httpOnly: true,
         secure: true,
       });
@@ -127,7 +127,7 @@ export class ChangeActionController {
   @Post('email')
   async changeEmail(
     @Body() { input, session_variables }: ActionPayload<Mutation_RootChange_EmailArgs>,
-    @Res({ passthrough: true }) response: Response,
+    @Res({ passthrough: true }) response: IHttpResponse,
   ): Promise<Verification_Resp> {
     if (!(await this.authService.checkIsUserVerified(Number(session_variables['x-hasura-user-id'])))) {
       throw new ActionException(CommonErr.ACCOUNT_NOT_VERIFIED);
@@ -149,7 +149,7 @@ export class ChangeActionController {
       );
 
       response.cookie(this.config.verification.cookieKey.email, verification.key, {
-        expires: new Date(verification.expires_at),
+        expires: new Date(verification.expires_at).getTime(),
         httpOnly: true,
         secure: true,
       });
@@ -169,11 +169,11 @@ export class ChangeActionController {
   @Post('password-reset')
   async resetPassword(
     @Body() { input: { payload } }: ActionPayload<Mutation_RootChange_Reset_PasswordArgs>,
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
+    @Req() request: IHttpRequest,
+    @Res({ passthrough: true }) response: IHttpResponse,
   ): Promise<Verification_Resp> {
     if (this.config.app.env === 'production') {
-      await this.recaptchaService.verify(payload.tokenV3, 'res-pass', request.ip, payload.tokenV2, 0.9);
+      await this.recaptchaService.verify(payload.tokenV3, 'res-pass', request.getIP(), payload.tokenV2, 0.9);
     }
 
     const identity = this.miscService.getIdentityType(payload.username);
@@ -192,7 +192,7 @@ export class ChangeActionController {
 
     if (!user) {
       response.cookie(this.config.verification.cookieKey.resetPass, await this.miscService.generateRandomString(16), {
-        expires: new Date(Date.now() + 900000),
+        expires: new Date(Date.now() + 900000).getTime(),
         httpOnly: true,
         secure: true,
       });
@@ -216,7 +216,7 @@ export class ChangeActionController {
       );
 
       response.cookie(this.config.verification.cookieKey.resetPass, verification.key, {
-        expires: new Date(verification.expires_at),
+        expires: new Date(verification.expires_at).getTime(),
         httpOnly: true,
         secure: true,
       });

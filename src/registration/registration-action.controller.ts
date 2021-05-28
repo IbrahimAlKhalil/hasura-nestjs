@@ -11,8 +11,8 @@ import { MiscService } from '../misc/misc.service';
 import { SmsService } from '../sms/sms.service';
 import { CommonErr, RegErr } from '../errors';
 import isEmail from 'validator/lib/isEmail';
+import { IHttpRequest } from 'nanoexpress';
 import { Config } from '../config/config';
-import { Request } from 'express';
 
 import {
   Action_Resp_Bool,
@@ -38,7 +38,7 @@ export class RegistrationActionController {
   @Post('create-account')
   async createAccount(
     @Body() { input: { payload } }: ActionPayload<Mutation_RootCreate_AccountArgs>,
-    @Req() request: Request,
+    @Req() request: IHttpRequest,
   ): Promise<Action_Resp_Bool> {
     if (payload.password.length < 8) {
       throw new ActionException(RegErr.PASSWORD_LENGTH_MIN);
@@ -52,7 +52,7 @@ export class RegistrationActionController {
 
     if (this.config.app.env === 'production') {
       // Verify recaptcha
-      await this.recaptchaService.verify(payload.tokenV3, RecaptchaAction.verify, request.ip, payload.tokenV2);
+      await this.recaptchaService.verify(payload.tokenV3, RecaptchaAction.verify, request.getIP(), payload.tokenV2);
 
       if (payload.email) {
         // Validate email address

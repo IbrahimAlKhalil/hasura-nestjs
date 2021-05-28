@@ -8,7 +8,6 @@ import { CommonErr, VerificationErr } from '../errors';
 import { ActionException } from '../action-exception';
 import { MiscService } from '../misc/misc.service';
 import isEmail from 'validator/lib/isEmail';
-import { Request, Response } from 'express';
 
 import {
   Action_Resp_Bool,
@@ -18,6 +17,7 @@ import {
   Mutation_RootVerificationArgs,
 } from '../typings';
 import { Config } from '../config/config';
+import { IHttpRequest, IHttpResponse } from 'nanoexpress';
 
 @Controller('verification-action')
 export class VerificationActionController {
@@ -40,8 +40,8 @@ export class VerificationActionController {
   @Post('verify')
   async verify(
     @Body() { input: { payload }, session_variables }: ActionPayload<Mutation_RootVerificationArgs>,
-    @Res({ passthrough: true }) response: Response,
-    @Req() request: Request,
+    @Res({ passthrough: true }) response: IHttpResponse,
+    @Req() request: IHttpRequest,
   ): Promise<Action_Resp_Bool> {
     const verification = await this.verificationService.getVerification(payload.id);
 
@@ -138,7 +138,7 @@ export class VerificationActionController {
   @Post('edit')
   async edit(
     @Body() { input: { payload }, session_variables }: ActionPayload<Mutation_RootVerification_EditArgs>,
-    @Req() request: Request,
+    @Req() request: IHttpRequest,
   ): Promise<Action_Resp_Bool> {
     const verification = await this.getVerificationForEditResend(
       payload.id,
@@ -193,7 +193,7 @@ export class VerificationActionController {
   @Post('resend')
   async resend(
     @Body() { input: { id }, session_variables }: ActionPayload<Mutation_RootVerification_ResendArgs>,
-    @Req() request: Request,
+    @Req() request: IHttpRequest,
   ): Promise<Action_Resp_Bool> {
     const verification = await this.getVerificationForEditResend(
       id,
