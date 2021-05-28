@@ -20,7 +20,7 @@
     "@nestjs/event-emitter": "^0.0.3",
     "@nestjs/jwt": "^7.2.0",
     "axios": "^0.21.1",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.0.1",
     "callsite": "^1.0.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",

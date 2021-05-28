@@ -24,7 +24,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.22.0
   '@typescript-eslint/parser': ^4.22.0
   axios: ^0.21.1
-  bcryptjs: ^2.4.3
+  bcrypt: ^5.0.1
   callsite: ^1.0.0
   chokidar: ^3.5.1
   class-transformer: ^0.4.0
@@ -37,7 +37,7 @@ specifiers:
   google-auth-library: ^7.0.4
   google-libphonenumber: ^3.2.19
   graphql: ^15.5.0
-  hasura-cli: ^2.0.0-alpha.7
+  hasura-cli: ^2.0.0-alpha.10
   ioredis: ^4.27.1
   lodash: ^4.17.21
   minio: ^7.0.18
@@ -62,7 +62,7 @@ dependencies:
   '@nestjs/core': registry.nlark.com/@nestjs/core/7.6.15_2ef5148cf119d2e6a2825daac1d64a18
   '@nestjs/event-emitter': registry.nlark.com/@nestjs/event-emitter/0.0.3_2ef5148cf119d2e6a2825daac1d64a18
   '@nestjs/jwt': registry.nlark.com/@nestjs/jwt/7.2.0_@nestjs+common@7.6.15
-  bcryptjs: registry.nlark.com/bcryptjs/2.4.3
+  bcrypt: registry.nlark.com/bcrypt/5.0.1
   callsite: 1.0.0
   class-transformer: registry.nlark.com/class-transformer/0.4.0
   class-validator: registry.nlark.com/class-validator/0.13.1
@@ -673,6 +673,10 @@ packages:
     resolution: {integrity: sha1-0pHGpOl5ibXGHZrPOWrk/hM6cY0=, tarball: '@xtuc/long/download/@xtuc/long-4.2.2.tgz'}
     dev: true
 
+  /abbrev/1.1.1:
+    resolution: {integrity: sha1-+PLIh60Qv2f2NPAFtph/7TF5qsg=, tarball: abbrev/download/abbrev-1.1.1.tgz}
+    dev: false
+
   /acorn-jsx/5.3.1_acorn@7.4.1:
     resolution: {integrity: sha1-/IZh4Rt6wVOcR9v+oucrOvNNJns=, tarball: acorn-jsx/download/acorn-jsx-5.3.1.tgz}
     peerDependencies:
@@ -891,6 +895,11 @@ packages:
 
   /chownr/1.1.4:
     resolution: {integrity: sha1-b8nXtC0ypYNZYzdmbn0ICE2izGs=, tarball: chownr/download/chownr-1.1.4.tgz}
+    dev: false
+
+  /chownr/2.0.0:
+    resolution: {integrity: sha1-Fb++U9LqtM9w8YqM1o6+Wzyx3s4=, tarball: chownr/download/chownr-2.0.0.tgz}
+    engines: {node: '>=10'}
     dev: false
 
   /chrome-trace-event/1.0.3:
@@ -1518,6 +1527,13 @@ packages:
       universalify: 2.0.0
     dev: true
 
+  /fs-minipass/2.1.0:
+    resolution: {integrity: sha1-f1A2/b8SxjwWkZDL5BmchSJx+fs=, tarball: fs-minipass/download/fs-minipass-2.1.0.tgz}
+    engines: {node: '>= 8'}
+    dependencies:
+      minipass: 3.1.3
+    dev: false
+
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=, tarball: fs.realpath/download/fs.realpath-1.0.0.tgz}
 
@@ -2094,6 +2110,13 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
+  /make-dir/3.1.0:
+    resolution: {integrity: sha1-QV6WcEazp/HRhSd9hKpYIDcmoT8=, tarball: make-dir/download/make-dir-3.1.0.tgz?cache=0&sync_timestamp=1587638283407&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmake-dir%2Fdownload%2Fmake-dir-3.1.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      semver: 6.3.0
+    dev: false
+
   /make-error/1.3.6:
     resolution: {integrity: sha1-LrLjfqm2fEiR9oShOUeZr0hM96I=, tarball: make-error/download/make-error-1.3.6.tgz}
     dev: true
@@ -2182,11 +2205,32 @@ packages:
   /minimist/1.2.5:
     resolution: {integrity: sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=, tarball: minimist/download/minimist-1.2.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminimist%2Fdownload%2Fminimist-1.2.5.tgz}
 
+  /minipass/3.1.3:
+    resolution: {integrity: sha1-fUL/HzljVILhX5zbUxhN7r1YFf0=, tarball: minipass/download/minipass-3.1.3.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      yallist: 4.0.0
+    dev: false
+
+  /minizlib/2.1.2:
+    resolution: {integrity: sha1-6Q00Zrogm5MkUVCKEc49NjIUWTE=, tarball: minizlib/download/minizlib-2.1.2.tgz}
+    engines: {node: '>= 8'}
+    dependencies:
+      minipass: 3.1.3
+      yallist: 4.0.0
+    dev: false
+
   /mkdirp/0.5.5:
     resolution: {integrity: sha1-2Rzv1i0UNsoPQWIOJRKI1CAJne8=, tarball: mkdirp/download/mkdirp-0.5.5.tgz?cache=0&sync_timestamp=1605913429308&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmkdirp%2Fdownload%2Fmkdirp-0.5.5.tgz}
     hasBin: true
     dependencies:
       minimist: 1.2.5
+    dev: false
+
+  /mkdirp/1.0.4:
+    resolution: {integrity: sha1-PrXtYmInVteaXw4qIh3+utdcL34=, tarball: mkdirp/download/mkdirp-1.0.4.tgz?cache=0&sync_timestamp=1605913429308&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmkdirp%2Fdownload%2Fmkdirp-1.0.4.tgz}
+    engines: {node: '>=10'}
+    hasBin: true
     dev: false
 
   /ms/2.1.2:
@@ -2236,6 +2280,14 @@ packages:
 
   /node-releases/1.1.71:
     resolution: {integrity: sha1-yxM0sXmJaxyJ7P3UtyX7e738fbs=, tarball: node-releases/download/node-releases-1.1.71.tgz}
+
+  /nopt/5.0.0:
+    resolution: {integrity: sha1-UwlCu1ilEvzK/lP+IQ8TolNV3Ig=, tarball: nopt/download/nopt-5.0.0.tgz}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      abbrev: 1.1.1
+    dev: false
 
   /normalize-package-data/2.5.0:
     resolution: {integrity: sha1-5m2xg4sgDB38IzIl0SyzZSDiNKg=, tarball: normalize-package-data/download/normalize-package-data-2.5.0.tgz}
@@ -3979,6 +4031,25 @@ packages:
     dev: false
     optional: true
 
+  registry.nlark.com/@mapbox/node-pre-gyp/1.0.5:
+    resolution: {integrity: sha1-Kgsy/LQW+z8iUP0kyyqBQhpPWVA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@mapbox/node-pre-gyp/download/@mapbox/node-pre-gyp-1.0.5.tgz}
+    name: '@mapbox/node-pre-gyp'
+    version: 1.0.5
+    hasBin: true
+    dependencies:
+      detect-libc: registry.nlark.com/detect-libc/1.0.3
+      https-proxy-agent: 5.0.0
+      make-dir: 3.1.0
+      node-fetch: 2.6.1
+      nopt: 5.0.0
+      npmlog: registry.nlark.com/npmlog/4.1.2
+      rimraf: 3.0.2
+      semver: 7.3.5
+      tar: registry.nlark.com/tar/6.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   registry.nlark.com/@nanoexpress/middleware-body-parser/1.2.2:
     resolution: {integrity: sha1-XMh747tJZ92q9kPcj0HTU2YmprM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@nanoexpress/middleware-body-parser/download/@nanoexpress/middleware-body-parser-1.2.2.tgz}
     name: '@nanoexpress/middleware-body-parser'
@@ -4911,10 +4982,17 @@ packages:
     dev: false
     optional: true
 
-  registry.nlark.com/bcryptjs/2.4.3:
-    resolution: {integrity: sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/bcryptjs/download/bcryptjs-2.4.3.tgz}
-    name: bcryptjs
-    version: 2.4.3
+  registry.nlark.com/bcrypt/5.0.1:
+    resolution: {integrity: sha1-8aLCDyCOLM3O6kQz3wyLLFTs33E=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/bcrypt/download/bcrypt-5.0.1.tgz}
+    name: bcrypt
+    version: 5.0.1
+    engines: {node: '>= 10.0.0'}
+    requiresBuild: true
+    dependencies:
+      '@mapbox/node-pre-gyp': registry.nlark.com/@mapbox/node-pre-gyp/1.0.5
+      node-addon-api: registry.nlark.com/node-addon-api/3.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.nlark.com/before-after-hook/2.2.1:
@@ -6455,6 +6533,12 @@ packages:
       semver: 5.7.1
     dev: false
 
+  registry.nlark.com/node-addon-api/3.2.0:
+    resolution: {integrity: sha1-cCi1an61crc4c67XMaf5yTZfXuQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/node-addon-api/download/node-addon-api-3.2.0.tgz}
+    name: node-addon-api
+    version: 3.2.0
+    dev: false
+
   registry.nlark.com/node-emoji/1.10.0:
     resolution: {integrity: sha1-iIar0l2ce7YYAqZYUj0fjSqJsto=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/node-emoji/download/node-emoji-1.10.0.tgz}
     name: node-emoji
@@ -7410,6 +7494,20 @@ packages:
       fs-constants: registry.nlark.com/fs-constants/1.0.0
       inherits: 2.0.4
       readable-stream: 3.6.0
+    dev: false
+
+  registry.nlark.com/tar/6.1.0:
+    resolution: {integrity: sha1-0XJOm8wEuXexjVxXOzM6IgcimoM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/tar/download/tar-6.1.0.tgz}
+    name: tar
+    version: 6.1.0
+    engines: {node: '>= 10'}
+    dependencies:
+      chownr: 2.0.0
+      fs-minipass: 2.1.0
+      minipass: 3.1.3
+      minizlib: 2.1.2
+      mkdirp: 1.0.4
+      yallist: 4.0.0
     dev: false
 
   registry.nlark.com/temp-dir/2.0.0:
