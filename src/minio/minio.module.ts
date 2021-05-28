@@ -1,5 +1,5 @@
+import { Module, OnModuleInit } from '@nestjs/common';
 import { Config } from '../config/config';
-import { Module } from '@nestjs/common';
 import { Client } from 'minio';
 
 @Module({
@@ -22,5 +22,33 @@ import { Client } from 'minio';
     Client,
   ],
 })
-export class MinioModule {
+export class MinioModule implements OnModuleInit {
+  constructor(
+    private readonly config: Config,
+    private readonly minio: Client,
+  ) {
+  }
+
+  onModuleInit(): void {
+    if (this.config.app.env === 'development') {
+      const bucket = this.config.app.publicBucket;
+
+      this.minio.bucketExists(bucket).then(async exists => {
+        if (exists) {
+          return;
+        }
+
+        await this.minio.makeBucket(bucket, 'ap-southeast-1');
+        await this.minio.setBucketPolicy(bucket, JSON.stringify({
+          'Version': '2012-10-17',
+          'Statement': [{
+            'Effect': 'Allow',
+            'Principal': { 'AWS': ['*'] },
+            'Action': ['s3:GetObject'],
+            'Resource': ['arn:aws:s3:::public/*'],
+          }],
+        }));
+      });
+    }
+  }
 }

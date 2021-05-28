@@ -8,7 +8,6 @@ import { ChangeModule } from './change/change.module';
 import { HasuraModule } from './hasura/hasura.module';
 import { ConfigModule } from './config/config.module';
 import { BcryptModule } from './bcrypt/bcrypt.module';
-import { Module, OnModuleInit } from '@nestjs/common';
 import { LibPnModule } from './lib-pn/lib-pn.module';
 import { MinioModule } from './minio/minio.module';
 import { MailModule } from './mail/mail.module';
@@ -17,8 +16,7 @@ import { MiscModule } from './misc/misc.module';
 import { UserModule } from './user/user.module';
 import { UwsModule } from './uws/uws.module';
 import { SmsModule } from './sms/sms.module';
-import { Config } from './config/config';
-import { Client } from 'minio';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [
@@ -49,33 +47,6 @@ import { Client } from 'minio';
   ],
   providers: [],
 })
-export class AppModule implements OnModuleInit {
-  constructor(
-    private readonly config: Config,
-    private readonly minio: Client,
-  ) {
-  }
+export class AppModule {
 
-  onModuleInit(): void {
-    if (this.config.app.env === 'development') {
-      const bucket = this.config.app.publicBucket;
-
-      this.minio.bucketExists(bucket).then(async exists => {
-        if (exists) {
-          return;
-        }
-
-        await this.minio.makeBucket(bucket, 'ap-southeast-1');
-        await this.minio.setBucketPolicy(bucket, JSON.stringify({
-          'Version': '2012-10-17',
-          'Statement': [{
-            'Effect': 'Allow',
-            'Principal': { 'AWS': ['*'] },
-            'Action': ['s3:GetObject'],
-            'Resource': ['arn:aws:s3:::public/*'],
-          }],
-        }));
-      });
-    }
-  }
 }
