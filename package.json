@@ -72,6 +72,6 @@
     "cli-progress": "^3.9.0",
     "dockerode": "^3.3.0",
     "graphql": "^15.5.0",
-    "hasura-cli": "^2.0.0-alpha.7"
+    "hasura-cli": "^2.0.0-alpha.10"
   }
 }

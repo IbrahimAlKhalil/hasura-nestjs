@@ -21,7 +21,7 @@ const docker = new Docker(process.platform === 'win32' ? 'tcp://127.0.0.1:2375' 
 const prefix = process.env.APP_CODE;
 const images = {
   postgres: 'timescale/timescaledb:2.2.1-pg13',
-  hasura: 'hasura/graphql-engine:v2.0.0-alpha.10',
+  hasura: 'hasura/graphql-engine:v2.0.0-alpha.11',
   redis: 'eqalpha/keydb:alpine',
   minio: 'minio/minio:latest',
 };
