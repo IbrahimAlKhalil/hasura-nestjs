@@ -4,7 +4,7 @@
   "description": "backend",
   "author": "Ibrahim Al Khalil",
   "private": true,
-  "license": "Proprietary",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
