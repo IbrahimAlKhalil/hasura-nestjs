@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "hasura-nestjs",
   "version": "1.0.0",
-  "description": "backend",
+  "description": "Hasura-NestJS Boilerplate: Scalable Node.js backend with Hasura, NestJS, uWebSockets.js. Features websockets, authentication, registration.",
   "author": "Ibrahim Al Khalil",
   "private": true,
   "license": "MIT",
