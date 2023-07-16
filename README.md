@@ -70,24 +70,10 @@ To use the Hasura-NestJS boilerplate, follow these steps:
 
 4. Customize the boilerplate according to your project requirements. Utilize the pre-built modules and functionalities to accelerate your backend development.
 
-## Contributing
-
-Contributions to the Hasura-NestJS boilerplate are welcome! If you find any issues or have suggestions for improvements, please open an issue on the project's GitHub repository at [https://github.com/IbrahimAlKhalil/hasura-nestjs](https://github.com/IbrahimAlKhalil/hasura-nestjs).
-
-When contributing, please ensure that you follow the established coding conventions, write tests when applicable, and provide clear and concise documentation.
-
 ## License
 
 The Hasura-NestJS boilerplate is open-source and released under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use, modify, and distribute the codebase as per the terms of the license.
 
-## Acknowledgements
-
-This project would not be possible without the contributions of the open-source community. We would like to thank all the developers who have worked on the libraries, frameworks, and tools that made this boilerplate possible.
-
-Certainly! Here's the updated contact information section with your email address:
-
 ## Contact
 
-For any inquiries or questions, you can reach out to the project maintainer, Ibrahim Al-Khalil, at hm.ibrahimalkhalil@gmail.com. Feel free to contact for any support or feedback related to the project.
-
-We hope the Hasura-NestJS boilerplate proves to be a valuable resource for your backend development needs. Happy coding!
+If you have any questions or need further assistance, feel free to contact the project maintainer at hm.ibrahimalkhalil@gmail.com.
